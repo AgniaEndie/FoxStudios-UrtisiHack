@@ -25,7 +25,7 @@ function Office(props:props) {
 
     return (
         <div className={'list-items'}>
-            <h1>Office List By Org</h1>
+            <h1>Офисы</h1>
             <List sx={{width: '80%', maxWidth: 360, minHeight:400, bgcolor:'rgba(33 , 53 , 85 , 0.60)', color:'white', borderRadius:'9px', border:'3px solid #FFF'}}>
                 {offs?.map((r: Off) => (
                     <ListItem sx={{width:'90%', margin:'auto', textAlign:'center', borderRadius:'9px', border:'1px solid #FFF', marginTop:'5px', cursor:'pointer'}}

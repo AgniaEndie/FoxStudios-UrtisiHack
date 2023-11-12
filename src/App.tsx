@@ -7,6 +7,7 @@ import OfficesPage from "./pages/OfficesPage";
 import {EventsPage} from "./pages/EventsPage";
 import {RoomsPage} from "./pages/RoomsPage";
 import {EditEvent} from "./components/Event/EditEvent";
+import {MyEventPage} from "./pages/MyEventPage";
 
 export interface IUser {
     username: String,
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/offices" element={<OfficesPage handleUser={handleUser} user={user}/>}/>
                     <Route path="/rooms" element={<RoomsPage mode={"normal"} handleUser={handleUser} user={user}/>}/>
                     <Route path="/events" element={<EventsPage handleUser={handleUser} user={user}/>}/>
+                    <Route path="/events/my" element={<MyEventPage handleUser={handleUser} user={user}/>}/>
                     <Route path="/event" element={<EditEvent handleUser={handleUser} user={user}/>}/>
                 </Routes>
             </BrowserRouter>

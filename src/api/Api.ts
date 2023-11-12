@@ -82,3 +82,27 @@ export async function SubscribeToEvent(uuid:string){
     })
     return promise.data
 }
+
+export async function CreateEvent(data:any){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: "corporative/event/create", headers: {Authorization: token}, method: "POST", data
+    })
+    return promise.data
+}
+
+export async function UpdateEvent(data:any){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: "corporative/event/update", headers: {Authorization: token}, method: "PUT",data
+    })
+    return promise.data
+}
+
+export async function DeleteEvent(uuid:string){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: "corporative/event/delete", headers: {Authorization: token}, method: "DELETE"
+    })
+    return promise.data
+}

@@ -1,20 +1,21 @@
 import {IUser} from "../App";
-import {useLocation, useNavigate} from "react-router-dom";
-import Events from "../components/Event/Events";
-import {RoomsPage} from "./RoomsPage";
 import {Header} from "../components/Header/Header";
+import {RoomsPage} from "./RoomsPage";
+import Events from "../components/Event/Events";
+import {MyEvent} from "../components/Event/MyEvent";
+
 interface props {
     user: IUser | undefined,
     handleUser: (data: IUser) => void,
 }
-export function EventsPage(props: props){
-    const {state} = useLocation();
+
+export function MyEventPage(props:props){
 
     return(
         <>
             <Header handleUser={props.handleUser}/>
             <RoomsPage user={props.user} handleUser={props.handleUser} mode={"soft"}/>
-            <Events office={state.office_uuid} uuid={state.uuid} user={props.user} />
+            <MyEvent />
         </>
     )
 }

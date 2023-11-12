@@ -1,0 +1,21 @@
+.login-input{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+
+}
+.login-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 20%;
+  height: 50%;
+  background-color: rgba(33 , 53 , 85 , 0.60);
+  border-radius: 9px;
+  border : 3px solid #FFF ;
+  color: #FFFFFF;
+}

@@ -1,10 +1,10 @@
 import React, {useState, ChangeEvent, useEffect} from "react";
 import axios from "axios";
-
 import {Box, Button, Grid, TextField, Typography} from "@mui/material";
 import {Auth, Test} from "../../api/Api";
 import {useNavigate} from "react-router-dom";
 import {IUser} from "../../App";
+import "./Login.scss"
 
 interface Data {
     email: string,
@@ -14,6 +14,7 @@ interface Data {
 interface props {
     handleUser: any
 }
+// Создаем стили с помощью makeStyles
 
 export function Login(props: props) {
 
@@ -38,6 +39,7 @@ export function Login(props: props) {
     return (
         <Box sx={{
             height: '100vh',
+            color:'white',
         }}>
             <Box sx={{
                 display: 'flex',
@@ -46,19 +48,22 @@ export function Login(props: props) {
                 flexDirection: 'column',
                 height: '100%',
             }}>
-                <Typography variant='h5'>Вход</Typography>
-                <Grid container direction="column" alignItems="center">
-                    <TextField id="standard-basic" label="Почта" variant="standard" value={data.email} name="email"
-                               className='placeholder' type="text" onChange={handleChange}/>
-                    <TextField id="standard-basic" label="Пароль" variant="standard" value={data.password}
-                               name="password" className='placeholder' type="password" onChange={handleChange}/>
-                </Grid>
+                <div className={'login-form'}>
+                    <Typography variant='h5'>Вход</Typography>
+                    <div className={"login-input"}>
+                        <TextField focused id="standard-basic" label="Почта" variant="standard" value={data.email} name="email"
+                                   className='placeholder' type="text" onChange={handleChange} />
+                        <TextField focused id="standard-basic" label="Пароль" variant="standard" value={data.password}
+                                   name="password" className='placeholder' type="password" onChange={handleChange}/>
+                    </div>
 
-                <Button variant="contained" onClick={() => handleAuth(data)} sx={{
-                    backgroundColor: '#F99417',
-                    mt: 5,
-                }}>Войти</Button>
-                {/*<Button variant="contained" onClick={() => handleButtonClick()}>Тест</Button>*/}
+                    <Button variant="contained" onClick={() => handleAuth(data)} sx={{
+                        backgroundColor: '#FFFFFF',
+                        color:'black',
+                        mt: 5,
+                    }}>Войти</Button>
+                    {/*<Button variant="contained" onClick={() => handleButtonClick()}>Тест</Button>*/}
+                </div>
             </Box>
         </Box>
 

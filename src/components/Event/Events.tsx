@@ -71,10 +71,11 @@ function Events(props: props) {
 
     return (
         <div>
-            <h1>Events List By Room</h1>
-            <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+
+            <List sx={{width: '100%', maxWidth: 800, minHeight:400, bgcolor:'rgba(33 , 53 , 85 , 0.60)', color:'white',position:'absolute',right:"20%", top:'10%'}}>
+                <h1>Events List By Room</h1>
                 {events?.map((r: Event) => (
-                    <ListItem
+                    <ListItem sx={{width:'90%', margin:'auto', textAlign:'center', borderRadius:'9px', border:'1px solid #FFF', marginTop:'5px', cursor:'pointer'}}
                         key={r.uuid}
                         disableGutters //Это отступы если что
                         onClick={

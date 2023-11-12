@@ -1,6 +1,8 @@
 import {IUser} from "../App";
 import {useLocation} from "react-router-dom";
 import Office from "../components/Office/Office";
+import {Header} from "../components/Header/Header";
+import React from "react";
 
 interface props {
     user: IUser | undefined,
@@ -12,6 +14,7 @@ export default function OfficesPage(props: props) {
     const {state} = useLocation();
     return (
         <>
+            <Header handleUser={props.handleUser}/>
             <Office uuid={state.uuid} />
         </>
     )

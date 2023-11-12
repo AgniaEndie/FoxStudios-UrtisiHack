@@ -39,10 +39,11 @@ function Rooms(props: props) {
 
     return (
         <div>
-            <h1>Rooms List By Office</h1>
-            <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+
+            <List sx={{width: '80%', maxWidth: 360, minHeight:'100%', bgcolor:'rgba(33 , 53 , 85 , 0.60)', color:'white',position:'absolute',left:0, top:0}}>
+                <h1>Rooms List By Office</h1>
                 {rooms?.map((r: Room) => (
-                    <ListItem
+                    <ListItem sx={{width:'90%', margin:'auto', textAlign:'center', borderRadius:'9px', border:'1px solid #FFF', marginTop:'5px', cursor:'pointer'}}
                         key={r.uuid}
                         disableGutters //Это отступы если что
                         onClick={

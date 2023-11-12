@@ -24,11 +24,11 @@ function Office(props:props) {
     }
 
     return (
-        <div>
+        <div className={'list-items'}>
             <h1>Office List By Org</h1>
-            <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+            <List sx={{width: '80%', maxWidth: 360, minHeight:400, bgcolor:'rgba(33 , 53 , 85 , 0.60)', color:'white', borderRadius:'9px', border:'3px solid #FFF'}}>
                 {offs?.map((r: Off) => (
-                    <ListItem
+                    <ListItem sx={{width:'90%', margin:'auto', textAlign:'center', borderRadius:'9px', border:'1px solid #FFF', marginTop:'5px', cursor:'pointer'}}
                         key={r.uuid}
                         disableGutters //Это отступы если что
                         onClick={
@@ -37,8 +37,9 @@ function Office(props:props) {
                             }
                         }
                     >
-                        <ListItemText primary={`Line item ${r.name}`}
-                                      secondary={"Город: " + r.city}/>
+                        <ListItemText
+                                      primary={`Line item ${r.name}`}
+                                      secondary={`Город: ${r.city}`}/>
                     </ListItem>
                 ))}
             </List>

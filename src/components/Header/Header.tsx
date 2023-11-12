@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import React, {useEffect} from "react";
 import LogOut from "../LogOut/LogOut";
 import {IUser} from "../../App";
+import "./Header.scss"
 
 interface props {
     handleUser: any
@@ -30,7 +31,7 @@ export function Header(props:props){
             return <></>
         }
         else{
-            return <button onClick={() => {
+            return <button className={'exit'} onClick={() => {
                 HandleLogOut()
             }}>Выйти</button>
         }

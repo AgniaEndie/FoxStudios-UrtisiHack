@@ -1,9 +1,14 @@
-import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+
 interface props {
     handleUser: any
 }
-export function LogOut(props:props){
+
+export function LogOut(props: props) {
     localStorage.setItem("token", "")
-    props.handleUser(undefined)
+    const da = () => {
+        props.handleUser(undefined)
+    }
 }
+
 export default LogOut

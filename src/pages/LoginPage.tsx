@@ -9,7 +9,7 @@ interface props{
 export const LoginPage = (props:props)=>{
     return(
         <>
-            <Header/>
+            <Header handleUser={props.handleUser}/>
             <Login handleUser={props.handleUser}/>
             <Footer/>
         </>

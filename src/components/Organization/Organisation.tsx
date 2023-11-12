@@ -1,42 +1,17 @@
-import axios from 'axios';
-import React, {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import LogOut from "../LogOut/LogOut";
+import React, {useEffect, useState} from "react";
+import {Org} from "../../models/Models";
+import "./Organisation.scss"
 
-interface Org {
-    uuid: string,
-    name: string,
-    status: string
-}
-
-const baseURL = 'https://api.foxworld.online/corporative/organisation/all';
 interface props {
-    handleUser: any
+    org:Org
 }
-function Organisation(props:props) {
 
-    const navigate = useNavigate()
-
-    const handleNavigate = () => {
-        if (localStorage.getItem("token") == null || localStorage.getItem("token") == "") {
-            navigate("/login")
-        }
-    }
-
-    useEffect(() => {
-        handleNavigate()
-    }, [])
-
-    const HandleLogOut = () => {
-        LogOut(props.handleUser)
-        handleNavigate()
-    }
+function Organisation(props: props) {
     return (
         <div>
-            Main
-            <button onClick={() => {
-                HandleLogOut()
-            }}>Выйти</button>
+            <h2>{props.org.uuid}</h2>
+            <h2>{props.org.name}</h2>
+            <h2>{props.org.status}</h2>
         </div>
     );
 }

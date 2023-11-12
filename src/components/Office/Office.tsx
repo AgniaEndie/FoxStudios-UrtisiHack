@@ -1,43 +1,47 @@
 import axios from 'axios';
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {Off} from "../../models/Models";
+import {AllOrganisation, GetAllOffices} from "../../api/Api";
+import {List, ListItem, ListItemText} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
-interface Off {
-    uuid: string;
-    name: string;
-    city: string;
-    timeZone: string;
-    organisation: string;
+interface props {
+    uuid:string
 }
 
-const baseURL = 'https://api.foxworld.online/corporative/office/all';
+function Office(props:props) {
+    const navigate = useNavigate()
+    const [offs, setOff] = useState<Array<Off>>()
 
-function Office() {
-    const [posts, setPosts] = React.useState<Off[]>([]);
+    useEffect(() => {
+        handleOfficesList(props.uuid)
+    }, [])
 
-    React.useEffect(() => {
-        axios.get(baseURL)
-            .then((response) => {
-                setPosts(response.data);
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+    const handleOfficesList = (uuid:string) => {
+        GetAllOffices().then(r => {
+            setOff(r)
+        })
+    }
 
     return (
         <div>
-            <h1>Office List</h1>
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.uuid}>
-                        <p>Name: {post.name}</p>
-                        <p>City: {post.city}</p>
-                        <p>Time Zone: {post.timeZone}</p>
-                        <p>Organisation: {post.organisation}</p>
-                    </li>
+            <h1>Office List By Org</h1>
+            <List sx={{width: '100%', maxWidth: 360, bgcolor: 'background.paper'}}>
+                {offs?.map((r: Off) => (
+                    <ListItem
+                        key={r.uuid}
+                        disableGutters //Это отступы если что
+                        onClick={
+                            () => {
+                                {navigate("/rooms", {state:{room_uuid:r.uuid}})}
+                            }
+                        }
+                    >
+                        <ListItemText primary={`Line item ${r.name}`}
+                                      secondary={"Город: " + r.city}/>
+                    </ListItem>
                 ))}
-            </ul>
+            </List>
         </div>
     );
 }

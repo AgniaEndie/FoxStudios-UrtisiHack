@@ -1,5 +1,6 @@
-import axios, {AxiosInstance} from "axios";
+import axios from "axios";
 import {IUser} from "../App";
+import exp from "constants";
 
 
 const instance = axios.create({
@@ -9,29 +10,75 @@ const instance = axios.create({
     headers: {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json',
-    }
+    },
 });
-let token = localStorage.getItem("token") != null && localStorage.getItem("token") != "" ? "Bearer " + localStorage.getItem("token") : ""
 
 export async function Auth(data: any, handleUser: any) {
     const promise = await instance.request({
         data, url: "auth-server/main/auth", method: 'POST'
     })
     localStorage.setItem('token', promise.data.token)
-    let user: IUser = {
-        token: promise.data.token,
-        username: promise.data.username,
-        role: promise.data.role,
-        uuid: promise.data.uuid
-    }
-    console.log(user)
-    handleUser(user)
     return promise.data;
 }
 
 export async function Test() {
+    let token = "Bearer " + localStorage.getItem("token")
     const promise = await instance.request({
         url: "auth-server/main/test", headers: {Authorization: token}, method: "GET"
+    })
+    return promise.data
+}
+
+export async function AllOrganisation() {
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: "corporative/organisation/all", headers: {Authorization: token}, method: "GET"
+    })
+    return promise.data
+}
+
+export async function GetAllOffices() {
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: "corporative/office/all", headers: {Authorization: token}, method: "GET"
+    })
+    return promise.data
+}
+export async function GetAllRoomsByOffice(uuid:string) {
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: `corporative/room/all/${uuid}`, headers: {Authorization: token}, method: "GET"
+    })
+    return promise.data
+}
+
+export async function GetAllEventsByRoom(uuid:string){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: `corporative/event/room/get/${uuid}`, headers: {Authorization: token}, method: "GET"
+    })
+    return promise.data
+}
+
+export async function SubscribeList(){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: `corporative/event/subs/list`, headers: {Authorization: token}, method: "GET",
+    })
+    return promise.data
+}
+
+export async function UnSubscribeToEvent(uuid:string){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: `corporative/event/unsubscribe/${uuid}`, headers: {Authorization: token}, method: "DELETE"
+    })
+    return promise.data
+}
+export async function SubscribeToEvent(uuid:string){
+    let token = "Bearer " + localStorage.getItem("token")
+    const promise = await instance.request({
+        url: `corporative/event/subscribe/${uuid}`, headers: {Authorization: token}, method: "GET"
     })
     return promise.data
 }

@@ -1,13 +1,14 @@
 import React, {useState, ChangeEvent} from "react";
 import axios from "axios";
-import {Test} from "../Api/Api";
+
 import {Box, Button, Grid, TextField, Typography} from "@mui/material";
+import {Test} from "../../api/Api";
 
 interface Data {
     email: string,
     password: string,
 }
-export function Auth(){
+export function Login(){
     const [data, setData] = useState<Data>({email: "", password: ""});
 
     const handleButtonClick = () => {

@@ -1,45 +1,37 @@
-import axios from "axios";
+import axios, {AxiosInstance} from "axios";
+import {IUser} from "../App";
 
 
-const instance = (token: string) => {
-    return axios.create({
-        baseURL: "https://api.foxworld.online/",
-        // baseURL: "http://localhost:8082/",
-        timeout: 1000,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + token
-        }
-    });
-}
-
-export const Api = () => {
-    let token = localStorage.getItem("token")
-    if (token != null) {
-        console.log(token)
-        return instance(token)
-    } else {
-
-        return (
-            axios.create({
-                baseURL: "https://api.foxworld.online/",
-                // baseURL: "http://localhost:8082/",
-                timeout: 1000,
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    'Content-Type': 'application/json',
-                }
-            })
-        )
+const instance = axios.create({
+    baseURL: "https://api.foxworld.online/",
+    // baseURL: "http://localhost:8082/",
+    timeout: 1000,
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
     }
-}
+});
+let token = localStorage.getItem("token") != null && localStorage.getItem("token") != "" ? "Bearer " + localStorage.getItem("token") : ""
 
-export const Test = (token:string) => {
-
-    const promise = () => {
-        return Api().get("auth-server/main/test",{headers:{'Authorization':'Bearer ' + token}}).then(r => r.data)
+export async function Auth(data: any, handleUser: any) {
+    const promise = await instance.request({
+        data, url: "auth-server/main/auth", method: 'POST'
+    })
+    localStorage.setItem('token', promise.data.token)
+    let user: IUser = {
+        token: promise.data.token,
+        username: promise.data.username,
+        role: promise.data.role,
+        uuid: promise.data.uuid
     }
-    return promise()
+    console.log(user)
+    handleUser(user)
+    return promise.data;
 }
 
+export async function Test() {
+    const promise = await instance.request({
+        url: "auth-server/main/test", headers: {Authorization: token}, method: "GET"
+    })
+    return promise.data
+}

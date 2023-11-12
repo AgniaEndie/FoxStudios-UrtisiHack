@@ -1,35 +1,42 @@
 import axios from 'axios';
-import React from "react";
+import React, {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import LogOut from "../LogOut/LogOut";
 
-interface Org{
-    uuid:string,
-    name:string,
-    status:string
+interface Org {
+    uuid: string,
+    name: string,
+    status: string
 }
+
 const baseURL = 'https://api.foxworld.online/corporative/organisation/all';
-function Organisation() {
-    const [posts, setPosts] = React.useState<Org[]>([]);
+interface props {
+    handleUser: any
+}
+function Organisation(props:props) {
 
-    React.useEffect(() => {
-        axios.get(baseURL)
-            .then((response) => {
-                setPosts(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+    const navigate = useNavigate()
 
-    if (!posts || posts.length === 0) return null;
+    const handleNavigate = () => {
+        if (localStorage.getItem("token") == null || localStorage.getItem("token") == "") {
+            navigate("/login")
+        }
+    }
 
+    useEffect(() => {
+        handleNavigate()
+    }, [])
+
+    const HandleLogOut = () => {
+        LogOut(props.handleUser)
+        handleNavigate()
+    }
     return (
         <div>
-            {posts.map((post) => (
-                <div key={post.uuid}>
-                    <h1>{post.name}</h1>
-                    <p>{post.status}</p>
-                </div>
-            ))}
+            Main
+            <button onClick={() => {
+                HandleLogOut()
+            }}>Выйти</button>
         </div>
     );
 }
